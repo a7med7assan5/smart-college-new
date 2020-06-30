@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="settings"></ion-back-button>
+        </ion-buttons>
+        <ion-button slot="end" (click)="getNetworks()" class="ionBtn">
+            <ion-icon slot="start" name="wifi-outline"></ion-icon>
+            {{ 'SCAN' | translate}}
+        </ion-button>
+        <ion-title>
+            {{ 'SCANWIFI' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="scan-bluetooth">
+    <ion-list>
+        <ion-card *ngFor="let data of results">
+            <ion-item>
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'SSID' | translate}}:
+                        <strong> {{data.SSID}} </strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'BSSID' | translate}}:
+                        <strong> {{data.BSSID}} </strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'RSSI' | translate}}:
+                        <strong> {{data.level}} </strong>
+                    </p>
+                </div>
+            </ion-item>
+        </ion-card>
+    </ion-list>
+</ion-content>

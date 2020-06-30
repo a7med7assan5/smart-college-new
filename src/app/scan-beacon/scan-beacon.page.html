@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="settings"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'SCANBEACON' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="scan-beacon">
+    <ion-list>
+        <ion-card *ngIf="!beaconData; else beaconFound">
+            <ion-list>
+                <ion-item>
+                    <h2>{{ 'STARTSCAN' | translate}}</h2>
+                </ion-item>
+                <ion-item>
+                    <p>Click the start scan button to scan for beacons</p>
+                </ion-item>
+                <ion-item>
+                    <div class="show-list-numbers-and-dots">
+                        <ion-button (click)="startScanningForBeacon()" class="ionBtn ionBtn-update">
+                            {{ 'SCAN' | translate}}
+                        </ion-button>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+        <ng-template #beaconFound>
+            <ion-card>
+                <ion-card-header>
+                    Beacon Found
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-list>
+                        <ion-item> {{beaconData.address}} </ion-item>
+                        <ion-item> {{beaconData.temperature}} </ion-item>
+                        <ion-item> {{beaconData.rssi}} </ion-item>
+                    </ion-list>
+                    <a href="beaconData.url">URL</a>
+                </ion-card-content>
+            </ion-card>
+        </ng-template>
+    </ion-list>
+</ion-content>

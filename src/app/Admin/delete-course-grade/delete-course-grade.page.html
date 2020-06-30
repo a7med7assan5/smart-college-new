@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="courses"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'DELETECOURSEGRADE' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="delete-course-grade">
+    <form id="deleteCourseGrade-form" [formGroup]="validations_form" (ngSubmit)="deleteCourseGrade()">
+        <div *ngIf="coursedata">
+            <ion-list id="deleteCourseGrade-info">
+                <ion-item id="deleteCourseGrade-type">
+                    <ion-label>
+                        {{ 'GRADETYPE' | translate }}
+                    </ion-label>
+                    <ion-select [(ngModel)]="grade" [ngModelOptions]="{standalone: true}" formControlName="gradetype" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="{{ 'SELECTGRADETYPE' | translate }}" id='gradeType' (ionChange)="onSelectChange($event)"
+                        #gradeType aria-required="required">
+                        <ion-select-option *ngFor="let grade of coursedata.grades">{{grade.type}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+        </div>
+        <!-- [disabled]="!validations_form.valid" -->
+        <ion-button id="deleteCourseGrade-deleteCourseGradeBtn" type="submit" expand="block" class="ionBtn ionBtn-danger" value="deleteCourseGrade">
+            <ion-icon name="trash" slot="start"></ion-icon>
+            {{ 'DELETECOURSEGRADE' | translate }}
+        </ion-button>
+
+    </form>
+
+</ion-content>

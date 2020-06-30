@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="courses"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'STUDENTGRADES' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="student-grade">
+    <ion-list class="ion-padding">
+        <table id="table_id" class="table table-hover table-light display">
+            <thead>
+                <tr *ngIf="coursedata">
+                    <th scope="col">{{ 'ID' | translate }}</th>
+                    <th scope="col">{{ 'NAME' | translate }}</th>
+                    <th scope="col" *ngFor="let grades of coursedata">{{grades.type}}({{grades.grade}})</th>
+                    <th scope="col" *ngIf="courseTotalGrades">Total({{courseTotalGrades.totalGrades}})
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let userdata of usertotalgradestotal;index as i;">
+                    <th scope="row">{{userdata.user._id}}</th>
+                    <td>{{userdata.user.name}}</td>
+                    <td *ngFor="let fdata of things[i]">{{fdata}}</td>
+                    <th scope="row">{{userdata.totalGrades.totalGrades}}</th>
+
+                </tr>
+            </tbody>
+        </table>
+    </ion-list>
+
+    <div *ngIf="courseSemesterDataCode">
+        <ion-row *ngIf="isTeacherOrAdmin">
+            <ion-col size="6">
+                <ion-button id="student-grade-addGRADEBtn" *ngIf="hidebutton" type="submit" expand="block" (click)="addStudentGrade()" class="ionBtn ionBtn-success" value="AddGrade">
+                    <ion-icon name="add" slot="start"></ion-icon>
+                    {{ 'ADDGRADE' | translate }}
+                </ion-button>
+            </ion-col>
+            <ion-col size="6">
+                <ion-button id="courses-manageCourseBtn" *ngIf="hidebutton" type="submit" expand="block" (click)="updateStudentGrade()" class="ionBtn ionBtn-update" value="UpdateGrade">
+                    <ion-icon name="create-outline" slot="start"></ion-icon>
+                    {{ 'UPDATEGRADE' | translate }}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-button id="gradessheet-gradesReportBtn" type="submit" expand="block" *ngIf="isTeacherOrAdmin" (click)="gradesReport()" class="ionBtn ionBtn-success" value="gradesReport">
+            <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
+            {{ 'GRADESREPORT' | translate }}
+        </ion-button>
+    </div>
+</ion-content>

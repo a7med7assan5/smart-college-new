@@ -1,0 +1,66 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+
+            {{ 'COURSES' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="courses">
+    <ion-list id="courses-info">
+        <ion-item id="courses-select">
+            <ion-label>
+                {{ 'COURSES' | translate }}
+            </ion-label>
+            <ion-select [(ngModel)]="courses" [ngModelOptions]="{standalone: true}" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" id='department' (ionChange)="onSelectChange($event)">
+                <ion-select-option value="">{{ 'ALLCOURSES' | translate }}</ion-select-option>
+                <ion-select-option value="General">{{ 'GENERAL' | translate }}</ion-select-option>
+                <ion-select-option value="Information Systems">{{ 'INFORMATIONSYSTEMS' | translate }}
+                </ion-select-option>
+                <ion-select-option value="Computer Science">{{ 'COMPUTERSCIENCE' | translate }}</ion-select-option>
+                <ion-select-option value="Internet Technology">{{ 'INTERNETTECHNOLOGY' | translate }}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list class="ion-padding">
+        <table id="table_id" class="table table-hover table-light display">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'COURSECODE' | translate }}</th>
+                    <th scope="col">{{ 'NAME' | translate }}</th>
+                    <th scope="col">{{ 'STATUS' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let course of coursedata">
+                <tr>
+                    <th scope="row"> <a (click)="openCourse(row.courseCode)">{{course.courseCode}}</a></th>
+                    <td>{{course.courseName}}</td>
+                    <td>{{course.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ion-list>
+    <ion-row>
+        <ion-col size="6">
+            <ion-button id="courses-addCourseBtn" type="submit" expand="block" routerLink='/courses/add-course' class="ionBtn ionBtn-success" value="AddCourse">
+                <ion-icon name="add" slot="start"></ion-icon>
+                {{ 'ADDCOURSE' | translate }}
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button id="courses-manageCourseBtn" type="submit" expand="block" routerLink='/courses/manage-course' class="ionBtn ionBtn-danger" value="ManageCourse">
+                <ion-icon name="create-outline" slot="start"></ion-icon>
+                {{ 'MANAGECOURSE' | translate }}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

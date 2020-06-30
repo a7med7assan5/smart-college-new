@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="settings"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'CHANGEEMAIL' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="change-email">
+    <form id="changeEmail-form" [formGroup]="validations_form" (ngSubmit)="changeEmail(id, email, confirm_email)">
+        <ion-list id="changeEmail-info">
+            <div formGroupName="matching_emails">
+                <ion-item id="changeEmail-email">
+                    <ion-label>
+                        {{ 'NEWEMAIL' | translate }}
+                    </ion-label>
+                </ion-item>
+                <ion-item id="changeEmail-emailInput">
+                    <ion-input inputmode="email" formControlName="email" #email required></ion-input>
+                </ion-item>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.email">
+                        <div class="error-message" *ngIf="validations_form.get('matching_emails').get('email').hasError(validation.type) && (validations_form.get('matching_emails').get('email').dirty || validations_form.get('matching_emails').get('email').touched)">
+                            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-item id="changeEmail-confirmEmail">
+                    <ion-label>
+                        {{ 'CONFIRMEMAIL' | translate }}
+                    </ion-label>
+                </ion-item>
+                <ion-item id="changeEmail-confirmEmailInput">
+                    <ion-input inputmode="email" formControlName="confirm_email" #confirm_email required></ion-input>
+                </ion-item>
+                <div class="validation-errors">
+                    <ng-container *ngFor="let validation of validation_messages.confirm_email">
+                        <div class="error-message" *ngIf="validations_form.get('matching_emails').get('confirm_email').hasError(validation.type) && (validations_form.get('matching_emails').get('confirm_email').dirty || validations_form.get('matching_emails').get('confirm_email').touched)">
+                            <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <!-- These validations are for the form group -->
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.matching_emails">
+                    <div class="error-message" *ngIf="validations_form.get('matching_emails').hasError(validation.type) && (validations_form.get('matching_emails').get('confirm_email').dirty || validations_form.get('matching_emails').get('confirm_email').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+        </ion-list>
+        <ion-button id="changeEmail-updateUserBtn" type="submit" expand="block" [disabled]="!validations_form.valid" class="ionBtn ionBtn-success" value="changeEmail">
+            <ion-icon name="sync-outline" slot="start"></ion-icon>
+            {{ 'CHANGEEMAIL' | translate }}
+        </ion-button>
+    </form>
+</ion-content>

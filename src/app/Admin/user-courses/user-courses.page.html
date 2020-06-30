@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="users"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'USERCOURSES' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="user-courses">
+    <ion-list id="Usercourses-info">
+        <ion-item id="Usercourses-select">
+            <ion-label>
+                {{ 'COURSES' | translate }}
+            </ion-label>
+            <ion-select [(ngModel)]="courseType" [ngModelOptions]="{standalone: true}" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" id='role' (ionChange)="onSelectChange($event)">
+                <ion-select-option value="new">{{ 'NEW' | translate }}</ion-select-option>
+                <ion-select-option value="pass">{{ 'PASS' | translate }}</ion-select-option>
+                <ion-select-option value="fail">{{ 'FAIL' | translate }}</ion-select-option>
+                <!-- <ion-select-option value="postponed">{{ 'POSTPONED' | translate }}</ion-select-option> -->
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list class="ion-padding">
+        <table id="table_id" class="table table-hover table-light display">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'COURSECODE' | translate }}</th>
+                    <th scope="col">{{ 'COURSENAME' | translate }}</th>
+                    <th scope="col">{{ 'SEMESTERTIME' | translate }}</th>
+                    <th scope="col">{{ 'REGISTERATIONSTATUS' | translate }} </th>
+                </tr>
+            </thead>
+            <tbody *ngFor='let course of arr'>
+                <tr>
+                    <th scope="row"> <a (click)="openCourse(row.data.Id,row.data.semester_time)">{{course.courseCode}}</a></th>
+                    <td scope="row">{{course.courseName}}</td>
+                    <td scope="row">{{course.semester_time}}</td>
+                    <td scope="row">{{course.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ion-list>
+    <!-- <ion-button id="Usercourses-openCourseBtn" type="submit" expand="block" [routerLink]="['/user/course/info']"
+        (focus)="openCourse(course.courseCode);openSemester(course.courseCode,course.semester_time)"
+        class="ionBtn ionBtn-success" value="Open">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        {{ 'OPEN' | translate }}
+    </ion-button> -->
+
+    <ion-button id="Usercourses-addCourseBtn" type="submit" expand="block" (click)="openClickedUser()" class="ionBtn ionBtn-danger" value="AddDeleteCourse">
+        <ion-icon name="add" slot="start"></ion-icon>
+        {{ 'ADDDROPCOURSE' | translate }}
+    </ion-button>
+</ion-content>

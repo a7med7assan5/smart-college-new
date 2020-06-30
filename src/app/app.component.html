@@ -1,0 +1,45 @@
+<ion-app>
+    <ion-router-outlet></ion-router-outlet>
+
+    <!-- Tabs -->
+    <ion-tabs *ngIf="currentUser">
+        <ion-tab-bar slot="bottom">
+            <!-- <ion-tab-button tab="home">
+                <ion-icon name="home-outline"></ion-icon>
+                <ion-label>{{ 'HOME' | translate}}</ion-label>
+            </ion-tab-button> -->
+
+            <ion-tab-button tab="courses" *ngIf="isAdmin">
+                <ion-icon name="book-outline"></ion-icon>
+                <ion-label>{{ 'COURSES' | translate}}</ion-label>
+            </ion-tab-button>
+            <ion-tab-button tab="mycourses" *ngIf="isTeacherOrStudent">
+                <ion-icon name="book-outline"></ion-icon>
+                <ion-label>{{ 'MYCOURSES' | translate}}</ion-label>
+            </ion-tab-button>
+            <ion-tab-button tab="register/courses" *ngIf="isStudent">
+                <ion-icon name="book-outline"></ion-icon>
+                <ion-label>{{ 'COURSESREGISTERATION' | translate}}</ion-label>
+            </ion-tab-button>
+            <ion-tab-button tab="users" *ngIf="isAdmin">
+                <ion-icon name="book-outline"></ion-icon>
+                <ion-label>{{ 'USERS' | translate}}</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="messages">
+                <ion-icon name="chatbubbles-outline"></ion-icon>
+                <ion-label>{{ 'MESSAGES' | translate}}</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="notifications">
+                <ion-icon name="notifications-outline"></ion-icon>
+                <ion-label>{{ 'NOTIFICATIONS' | translate}}</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="settings">
+                <ion-icon name="settings-outline"></ion-icon>
+                <ion-label>{{ 'SETTINGS' | translate}}</ion-label>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </ion-tabs>
+</ion-app>

@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'USERS' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="users">
+    <ion-list id="users-info">
+        <ion-item id="users-select">
+            <ion-label>
+                {{ 'USERS' | translate }}
+            </ion-label>
+            <ion-select [(ngModel)]="users" [ngModelOptions]="{standalone: true}" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" id='role' (ionChange)="onSelectChange($event)">
+                <ion-select-option value="">{{ 'ALLUSERS' | translate }}</ion-select-option>
+                <ion-select-option value="student">{{ 'STUDENT' | translate }}</ion-select-option>
+                <ion-select-option value="teacher">{{ 'PROFESSOR' | translate }}</ion-select-option>
+                <ion-select-option value="admin">{{ 'ADMIN' | translate }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list class="ion-padding">
+        <table id="table_id" class="table table-hover table-light display">
+            <thead>
+                <tr>
+                    <th scope="col">{{ 'ID' | translate }}</th>
+                    <th scope="col">{{ 'NAME' | translate }}</th>
+                    <th scope="col">{{ 'EMAIL' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody *ngFor='let user of usersdata'>
+                <tr *ngFor="let userdata of usertotalgradestotal;index as i;">
+                    <th scope="row"><a (click)="openClickedUser(row._id)">{{user._id}}</a></th>
+                    <td>{{user.name}}</td>
+                    <td *ngFor="let fdata of things[i]">{{user.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ion-list>
+    <ion-row>
+        <ion-col size="6">
+            <ion-button id="users-addCourseBtn" type="submit" expand="block" routerLink='/user/add-user' class="ionBtn ionBtn-success" value="AddUser">
+                <ion-icon name="add" slot="start"></ion-icon>
+                {{ 'ADDUSER' | translate }}
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button id="users-manageCourseBtn" type="submit" expand="block" routerLink='/user/manage-user' class="ionBtn ionBtn-danger" value="ManageUser">
+                <ion-icon name="create-outline" slot="start"></ion-icon>
+                {{ 'MANAGEUSER' | translate }}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

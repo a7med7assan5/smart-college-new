@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'COURSES' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="student-courses">
+    <ion-list id="Usercourses-info">
+        <ion-item id="Usercourses-select">
+            <ion-label>
+                {{ 'COURSES' | translate }}
+            </ion-label>
+            <ion-select [(ngModel)]="courseType" [ngModelOptions]="{standalone: true}" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" id='role' (ionChange)="onSelectChange($event)">
+                <ion-select-option value="new">{{ 'NEW' | translate }}</ion-select-option>
+                <ion-select-option value="pass">{{ 'PASS' | translate }}</ion-select-option>
+                <ion-select-option value="fail">{{ 'FAIL' | translate }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-card *ngFor='let course of usercoursesdata'>
+        <ion-list>
+            <ion-item color="none">
+                {{course.x.courseName}}
+            </ion-item>
+            <ion-item>
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'COURSECODE' | translate}}:
+                        <strong> {{course.data.Id}} </strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'SEMESTERTIME' | translate}}:
+                        <strong> {{course.data.semester_time}} </strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item>
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'REGISTERATIONSTATUS' | translate}}:
+                        <strong> {{course.data.status}} </strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item color="positive" (click)="openSemester(course.data.Id,course.data.semester_time)">
+                <ion-icon name="open" item-left></ion-icon>
+                {{ 'OPEN' | translate}}
+            </ion-item>
+        </ion-list>
+    </ion-card>
+</ion-content>

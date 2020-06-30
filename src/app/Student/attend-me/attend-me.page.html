@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="mycourses"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'ATTENDANCE' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="attendMe">
+    <ion-list id="attendance-wifi">
+        <ion-item id="attendance-wifi-status">
+            <ion-icon name="wifi" item-left></ion-icon>
+            Wifi Connected
+        </ion-item>
+    </ion-list>
+    <ion-card id="attendance-card">
+        <ion-list>
+            <ion-item color="none" id="attendance-card-course">
+                Database System 1
+            </ion-item>
+            <ion-item id="attendance-card-courseCode">
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'COURSECODE' | translate}}:
+                        <strong>123</strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item id="attendance-card-week">
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'WEEK' | translate}}:
+                        <strong>12</strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item id="attendance-card-time">
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'TIME' | translate}}:
+                        <strong>09:30:50 AM</strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item id="attendance-card-date">
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'DATE' | translate}}:
+                        <strong>12/02/2020</strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item id="attendance-card-hall">
+                <div class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'LOCATION' | translate}}:
+                        <strong>Hall 7</strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item color="balanced" id="attendance-attendMe" (click)="attendMe(lectureNumber,beaconId)">
+                <ion-icon name="checkbox-outline" item-left></ion-icon>
+                {{ 'ATTENDME' | translate}}
+            </ion-item>
+        </ion-list>
+    </ion-card>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="mycourses"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'ATTENDANCESHEET' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="attendancesheet" *ngIf="courseCode1">
+    <table id="table_id" class="table table-hover table-light display">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col" *ngFor="let lectures of coursedata">Week {{lectures.lectureNumber}}</th>
+
+                <th scope="col" *ngIf="lecturesnumber">Total ({{lecturesnumber}})</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let userdata of usertotalattendancetotal;index as i;">
+                <th scope="row">{{userdata.user._id}}</th>
+                <td>{{userdata.user.name}}</td>
+                <td *ngFor="let fdata of things[i]">{{fdata.status}}</td>
+                <th scope="row">{{userdata.totalattendance.totalattendance}}</th>
+
+            </tr>
+
+
+        </tbody>
+    </table>
+    <ion-button id="attendancesheet-attendanceReportBtn" type="submit" expand="block" *ngIf="isTeacher" [routerLink]="['/course/semester/students-attendance-report',courseCode1.courseCode,courseCode1.semesters[0].semester_time]" class="ionBtn ionBtn-success"
+        value="attendanceReport">
+        <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
+        {{ 'ATTENDANCEREPORT' | translate }}
+    </ion-button>
+</ion-content>

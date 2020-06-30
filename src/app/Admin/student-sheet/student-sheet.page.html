@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="courses"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'STUDENTSHEET' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="student-sheet">
+    <ion-list class="ion-padding">
+        <table id="table_id" class="table table-hover table-light display">
+            <thead>
+                <tr *ngIf="coursedata">
+                    <th scope="col">{{ 'INDEX' | translate }}</th>
+                    <th scope="col">{{ 'ID' | translate }}</th>
+                    <th scope="col">{{ 'NAME' | translate }}</th>
+                    <th scope="col">{{ 'EMAIL' | translate }} </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let user of courseusers;index as i">
+                <tr>
+                    <th scope="row">{{i+1}}</th>
+                    <th scope="row"><a [routerLink]="['/user/profile/', row._id]">{{user._id}}</a></th>
+                    <td scope="row">{{user.name}}</td>
+                    <th scope="row">{{user.email}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="settings"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'QRSCANNER' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="qr-scanner">
+
+    <ion-button (click)="StartScanning()" expand="full" class="ionBtn ionBtn-success">
+        <ion-icon name="scan-outline" slot="start"></ion-icon>
+        Start Scanning</ion-button>
+
+</ion-content>

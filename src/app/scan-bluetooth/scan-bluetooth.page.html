@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="settings"></ion-back-button>
+        </ion-buttons>
+        <ion-button slot="end" (click)="scan()" class="ionBtn">
+            <ion-icon slot="start" name="bluetooth-outline"></ion-icon>
+            {{ 'SCAN' | translate}}
+        </ion-button>
+        <ion-title>
+            {{ 'SCANBLUETOOTH' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="scan-bluetooth">
+    <ion-list>
+        <ion-card *ngFor="let device of devices" (click)="deviceSelected(device)">
+            <ion-list>
+                <ion-item>
+                    <div class="show-list-numbers-and-dots">
+                        <p>
+                            {{ 'DEVICENAME' | translate}}:
+                            <strong> {{ device.name || 'Unnamed' }} </strong>
+                        </p>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div class="show-list-numbers-and-dots">
+                        <p>
+                            {{ 'DEVICEID' | translate}}:
+                            <strong> {{ device.id }} </strong>
+                        </p>
+                    </div>
+                </ion-item>
+                <ion-item>
+                    <div class="show-list-numbers-and-dots">
+                        <p>
+                            {{ 'RSSI' | translate}}:
+                            <strong> RSSI: {{ device.rssi }}</strong>
+                        </p>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+    </ion-list>
+</ion-content>

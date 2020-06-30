@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="users"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'USERCOURSEINFO' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" id="user-course-info-sheet">
+    <table id="table_id" class="table table-hover table-light display">
+        <thead>
+            <tr *ngIf="GradeTypeGrade">
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col" *ngFor="let grade of GradeTypeGrade">{{grade.type}}
+                    <span>({{grade.grade}})</span> </th>
+                <th scope="col" *ngIf="courseTotalGrades">Total({{courseTotalGrades.totalGrades}})
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="usertotalgrades">
+                <th scope="row">{{usertotalgrades.user._id}}</th>
+                <th scope="row">{{usertotalgrades.user.name}}</th>
+                <td *ngFor="let grade of arrofdata">{{grade.score}}</td>
+                <th scope="row">{{usertotalgrades.totalGrades.totalGrades}}</th>
+
+            </tr>
+        </tbody>
+    </table>
+</ion-content>
